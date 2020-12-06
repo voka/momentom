@@ -3,7 +3,7 @@
 const div = document.createElement('div');
 div.setAttribute('id', 'toDo_actual');
 document.body.appendChild(div);
-const toDo = document.querySelectorAll('.toDo');
+const toDo = document.querySelector('.toDo');
 const Actual = document.querySelector('#toDo_actual');
 Actual.style.position = "absolute";
 //fullscreen 닫기 버튼영역
@@ -12,6 +12,7 @@ const BtnClose = document.createElement('div');
      BtnClose.innerHTML = "Close";
      BtnClose.addEventListener('click',closetoDo);
 	 BtnClose.classList.add('text-black','font-mono','text-3xl','shadow','bg-white','text-red-400');
+
 
 
 //팝업들 
@@ -76,19 +77,17 @@ function opentoDo(event) {
 		Actual.style.top = '0';
 		Actual.style.left = '0';
 		Actual.style.margin = '0';
+		toDoForm = Actual.querySelector(".js-toDoForm"),
+		toDoInput = Actual.querySelector(".js-toDoInput"),
+		toDoList = Actual.querySelector(".js-toDoList");
+		clearBtn = Actual.querySelector(".clearToDo");
+		SetToDo();
+		load_to_do();
 	}, 1);
 	
 	setTimeout(function(){
 		Actual.classList.add('full-screen','topLayout');
-		if(toDoForm === null){ //한번만 리스트 세팅 하면 됨.
-			toDoForm = Actual.querySelector(".js-toDoForm"),
-			toDoInput = Actual.querySelector(".js-toDoInput"),
-			toDoList = Actual.querySelector(".js-toDoList");
-			clearBtn = Actual.querySelector(".clearToDo");
-			SetToDo();
-			load_to_do();
-
-		}
+		
 		
 	}, 1000);
 	
@@ -120,34 +119,34 @@ function SetToDo(){
 			return false;
 		}
 		Actual.classList.add('topLayout');
-		paintToDo(currentValue);
+		paintToDo(currentValue,true);
 		reset_input();
 	}
 	
 }
 //text slice
-let flag = 0;
+let flags = 0;
 function sliceText(event){
-	if(flag === 0){
+	if(flags === 0){
 		const divList = event.target.parentNode.parentNode.firstChild;
 		const span1 = divList.firstChild.nextSibling;
 		const span2 = span1.nextSibling;
 		divList.classList.add('sliceText_before','sliceText_hover','.sliceText_active');
 		span1.classList.add('sliceText1');
 		span2.classList.add('sliceText2');
-		flag=1;
+		flags=1;
 	}
 	
 }
 function recalText(event){
-	if(flag === 1){
+	if(flags === 1){
 		const divList = event.target.parentNode.parentNode.firstChild;
 		const span1 = divList.firstChild.nextSibling;
 		const span2 = span1.nextSibling;
 		divList.classList.add('sliceText_before','sliceText_hover','.sliceText_active');
 		span1.classList.remove('sliceText1');
 		span2.classList.remove('sliceText2');
-		flag=0;
+		flags=0;
 	}
 	
 }
@@ -168,17 +167,17 @@ function paintToDo(text){
 	delBtn.addEventListener("mouseover",sliceText);
 	delBtn.addEventListener("mouseout",recalText);
 	li.innerHTML = li.innerHTML + "<div class='toDo-list-item mx-5'>" + text + "<span class='Mask font-black'><span>" + text + "</span></span>" + "<span class='Mask font-black'><span>" + text + "</span></span> </div>"
-	
 	li.id = index;
 	li.classList.add("flex",'border-2','my-1');
 	li.style.backgroundColor = '#FBFBAD';
-	toDoList.appendChild(li);
 	li.appendChild(delBtn);
+	toDoList.appendChild(li);
 	const todo_obj ={
 		text: text, id: index
 	};
 	toDos.push(todo_obj);
 	save_todo();
+	
 }
 //JSON.stringfy() 괄호 안에 있는자바스크립트를 스트링으로 변환해준다.
 function save_todo(){
@@ -188,16 +187,18 @@ function save_todo(){
 //todo delete
 function del_todos(event){
 	let btn = event.target;
-	console.dir(btn.localName);
 	if(btn.localName == "img"){
 		btn = btn.parentNode;
 	}
 	const li = btn.parentNode;
 	toDoList.removeChild(li);
+
+	console.log(toDos);
 	const cleanToDos = toDos.filter(function(toDo){
 		return toDo.id !== parseInt(li.id);
 	})
 	toDos = cleanToDos;
+	console.log(toDos);
 	save_todo();
 }
 
@@ -244,14 +245,11 @@ function closetoDo(event){
 		Menu.style = '';;
 		superStar.classList.remove(HIDE);
     }, 1000);
-    
+    toDos = [];
 };
 
 function init(){
-    for (let i = 0; i < toDo.length; i++) {
-        toDo[i].addEventListener("click", opentoDo);
-	}
-	
+    toDo.addEventListener("click", opentoDo);
 }
 
 init();

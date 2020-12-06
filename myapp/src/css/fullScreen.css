@@ -22,7 +22,8 @@
     .toDo.page {
       background: linear-gradient(135deg, #6ecdc7 0%, #f7f7f7 100%); }
     .toDo.full-screen {
-      height: 100vh;
+      height: 100%;
+      width : 100%;
       margin: 0;
       border-radius: 0; }
       .toDo.full-screen .modal-content{
