@@ -160,7 +160,7 @@ function paintToDo(text){
 	const li = document.createElement("li");
 	const delBtn = document.createElement("button");
 	const delImage = document.createElement('img');
-	delImage.setAttribute("src","../img/X.png");
+	delImage.setAttribute("src","../img/del.png");
 	delImage.style.height = '25px';
 	delImage.style.width = '25px';
 	delImage.classList.add('shadow');
