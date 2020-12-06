@@ -52,9 +52,3 @@ body{
   background-image: url("../../img/clear.jpg");
   
 }
-
-.delIMG{
-  background-image: url("../../img/del.png");
-  width: 25px;
-  height: 25px;
-}

@@ -132,7 +132,6 @@ function sliceText(event){
 		const divList = event.target.parentNode.parentNode.firstChild;
 		const span1 = divList.firstChild.nextSibling;
 		const span2 = span1.nextSibling;
-		console.log(divList,span1,span2);
 		divList.classList.add('sliceText_before','sliceText_hover','.sliceText_active');
 		span1.classList.add('sliceText1');
 		span2.classList.add('sliceText2');
@@ -145,7 +144,6 @@ function recalText(event){
 		const divList = event.target.parentNode.parentNode.firstChild;
 		const span1 = divList.firstChild.nextSibling;
 		const span2 = span1.nextSibling;
-		console.log(divList,span1,span2);
 		divList.classList.add('sliceText_before','sliceText_hover','.sliceText_active');
 		span1.classList.remove('sliceText1');
 		span2.classList.remove('sliceText2');
@@ -209,7 +207,6 @@ function reset_input(){
 //todo clear
 
 function clearTodo(event){
-	console.log(event.target);
 	toDos = [];
 	save_todo();
 	closetoDo();
