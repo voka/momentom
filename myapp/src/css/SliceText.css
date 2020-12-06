@@ -1,0 +1,50 @@
+
+.toDo-list {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;}
+
+.toDo-list-item {
+  position: relative;
+  color: transparent;
+  cursor: pointer; }
+
+.Mask {
+  display: block;
+  position: absolute;
+  overflow: hidden;
+  color:black;
+  top: 0;
+  height: 49%;
+  transition: all 0.8s cubic-bezier(0.16, 1.08, 0.38, 0.98); }
+  .Mask span {
+    display: block; }
+
+.Mask + .Mask {
+  top: 48.9%;
+  height: 51.1%; }
+  .Mask + .Mask span {
+    transform: translateY(-49%); }
+
+  button:hover{
+    transform: scale(1.5);
+  }
+  .sliceText_hover:hover,
+  .sliceText_active:active{
+    color: #FF2C75;
+    transform: scale(1) skewX(12deg) translateX(10px);
+    transform: skewX(12deg) translateX(-10px);
+  }
+
+  .sliceText1{
+    color: #ff0101;
+    transform: scale(1) skewX(12deg) translateX(10px);
+  }
+  .sliceText2{
+    color: #ff0101;
+    transform: skewX(12deg) translateX(-10px);
+  }
