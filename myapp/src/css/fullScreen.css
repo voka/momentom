@@ -2,6 +2,7 @@
 
   
   .toDo {
+    margin-left: 100px;
     display: flex;
     height: 100px;
     width: 765px;
